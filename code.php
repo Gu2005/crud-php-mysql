@@ -2,6 +2,31 @@
 session_start();
 require 'dbcon.php';
 
+
+if(isset($_POST['delete_student']))
+{
+    $student_id = mysqli_real_escape_string($con, $_POST['delete_student']);
+
+    $query = "DELETE FROM students WHERE id='$student_id'";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run)
+    {
+        $_SESSION['message'] = "Estudante Excluido com sucesso!";
+        header("Location: index.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Falha ao Excluir Estudante";
+        header("Location: index.php");
+        exit(0); 
+    }
+}
+
+
+
+
 if(isset($_POST['update_student']))
 {
 
@@ -12,7 +37,7 @@ if(isset($_POST['update_student']))
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
     $course = mysqli_real_escape_string($con, $_POST['course']);
 
-    $query = "UPDATE students SET  name='$name', email='$email', phone='$phone', course='$course' WHERE id='$student_id'";
+    $query = "UPDATE students  SET  name='$name', email='$email', phone='$phone', course='$course' WHERE id='$student_id'";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)

@@ -8,7 +8,7 @@ require 'dbcon.php';
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Tabela Estudantes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
@@ -54,9 +54,11 @@ require 'dbcon.php';
                                             <td><?= $student['phone']; ?></td>
                                             <td><?= $student['course']; ?></td>
                                             <td>
-                                                <a href="" class="btn btn-info btn-sm">Ver</a>
+                                                <a href="student-view.php?id=<?= $student['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                                                 <a href="student-edit.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm">Editar</a>
-                                                <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                                                <form action="code.php" method="POST" class="d-inline">
+                                                    <button type="submit" name="delete_student" value="<?=$student['id'];?>" class="btn btn-danger btn-sm">Excluir</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         <?php
